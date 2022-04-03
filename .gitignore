@@ -11,4 +11,6 @@ project/plugins/project/
 .cache
 .lib/
 .idea/
+!/.idea/runConfigurations
+logs/
 .bsp/
