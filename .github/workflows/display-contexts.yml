@@ -1,0 +1,26 @@
+name: Display contexts
+on: [push]
+jobs:
+  Display-Contexts-of-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github context
+        run: echo "Github context ${{ toJSON(github) }}."
+      - name: Env context
+        run: echo "Env context ${{ toJSON(env) }}."
+      - name: Job context
+        run: echo "Job context ${{ toJSON(job) }}."
+      - name: Steps context
+        run: echo "steps context ${{ toJSON(steps) }}."
+      - name: Runner context
+        run: echo "runner context ${{ toJSON(runner) }}."
+      - name: Strategy context
+        run: echo "strategy context ${{ toJSON(strategy) }}."
+      - name: Matrix context
+        run: echo "matrix context ${{ toJSON(matrix) }}."
+      - name: Needs context
+        run: echo "needs context ${{ toJSON(needs) }}."
+      - name: Inputs context
+        run: echo "inputs context ${{ toJSON(inputs) }}."
+    env:
+      test: Some env var
