@@ -1,4 +1,4 @@
 # Table of content
 
-1. Learning [Github](GITHUB.md)
-2. Learning [sbt](SBT.md)
+1. Learning [Github](github.md)
+2. Learning [sbt](sbt.md)
