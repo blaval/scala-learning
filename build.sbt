@@ -5,7 +5,7 @@ val gigahorse = "com.eed3si9n"      %% "gigahorse-okhttp" % "0.6.0"
 val playJson  = "com.typesafe.play" %% "play-json"        % "2.9.2"
 
 lazy val ScalaLearning = (project in file("."))
-  .aggregate(scalaLearningCore, scalaLearningCats)
+  .aggregate(scalaLearningCore, scalaLearningCats, scalaLearningDecline)
   .dependsOn(scalaLearningCore)
   .enablePlugins(JavaAppPackaging)
   .disablePlugins(plugins.JUnitXmlReportPlugin)
@@ -50,3 +50,29 @@ lazy val scalaLearningCats = (project in file("modules/cats"))
       //  "org.typelevel" %% "cats-mtl" % "1.1.2.1"
     )
   )
+
+val nativeImageSettings: Seq[Setting[_]] = Seq(
+  nativeImageVersion := "21.2.0",
+  nativeImageOptions ++= Seq(
+    s"-H:ReflectionConfigurationFiles=${(Compile / resourceDirectory).value / "reflect-config.json"}",
+    s"-H:ResourceConfigurationFiles=${(Compile / resourceDirectory).value / "resource-config.json"}",
+    "-H:+ReportExceptionStackTraces",
+    "--no-fallback",
+    "--allow-incomplete-classpath",
+    "-H:-CheckToolchain"
+  ),
+  nativeImageAgentMerge := true,
+  nativeImageReady      := { () => println("IT IS READY!!!!!") }
+)
+
+lazy val scalaLearningDecline = (project in file("modules/decline"))
+  .settings(
+    name                := "scala-learning-decline",
+    Compile / mainClass := Some("blaval.DeclineCommandIOApp"),
+    run / fork          := true,
+    libraryDependencies ++= Seq("com.monovore" %% "decline" % "2.2.0", "com.monovore" %% "decline-effect" % "2.2.0"),
+    nativeImageSettings,
+    publish        := {},
+    publish / skip := true
+  )
+  .enablePlugins(NativeImagePlugin)

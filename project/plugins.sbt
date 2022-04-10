@@ -3,4 +3,7 @@ addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.9.9")
 addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.20")
 // assisting in building sbt projects using GitHub Actions https://github.com/djspiewak/sbt-github-actions
 addSbtPlugin("com.codecommit" % "sbt-github-actions" % "0.14.2")
+// easy to generate native-image binaries with sbt https://github.com/scalameta/sbt-native-image
+addSbtPlugin("org.scalameta" % "sbt-native-image" % "0.3.2")
+
 addDependencyTreePlugin

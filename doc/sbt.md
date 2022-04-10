@@ -38,6 +38,8 @@ show <task> # displays the output of the task
 inspect <task> # returns info on tasks or settings
 inspect tree <task> # generate the dependencies tree of the task
 console # run scala interpreter (REPL)
+consoleQuick # Starts the Scala interpreter (REPL) with the project dependencies on the classpath.
+doc # Generates API documentation from your Scala source code using scaladoc.
 plugins # lists auto plugins (enabled and not enabled) per subprojects
 last <task> # see the previous output of a command at a higher verbosity
 evicted # Display detailed eviction warnings.

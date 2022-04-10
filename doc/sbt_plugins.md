@@ -8,8 +8,9 @@
 2. [Plugins description](#plugins-description)
     1. [sbt-dependency-graph](#sbt-dependency-graph)
     2. [sbt-github-actions](#sbt-github-actions)
-    3. [sbt-native-packager](#sbt-native-packager)
-    4. [sbt-tpolecat](#sbt-tpolecat)
+    3. [sbt-native-image](#sbt-native-packager)
+    4. [sbt-native-packager](#sbt-native-packager)
+    5. [sbt-tpolecat](#sbt-tpolecat)
 
 ## Plugins configuration
 
@@ -22,6 +23,8 @@ addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.9.9")
 addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.20")
 // assisting in building sbt projects using GitHub Actions https://github.com/djspiewak/sbt-github-actions
 addSbtPlugin("com.codecommit" % "sbt-github-actions" % "0.14.2")
+// easy to generate native-image binaries with sbt https://github.com/scalameta/sbt-native-image
+addSbtPlugin("org.scalameta" % "sbt-native-image" % "0.3.1")
 ```
 
 For sbt < 1.3
@@ -34,6 +37,16 @@ addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.10.0-RC1") // For 
 ```
 
 ### in build.sbt
+
+```scala
+// build.sbt
+lazy val myNativeImageProject = project
+  .enablePlugins(NativeImagePlugin)
+  .settings(
+    // ...
+    Compile / mainClass := Some("com.my.MainClass")
+  )
+```
 
 ## Plugins description
 
@@ -66,6 +79,28 @@ An example of how this "source of truth" pattern differs between the two plugins
 With sbt-travisci, the crossScalaVersions and scalaVersion settings are populated from the scala:
 key in .travis.yml. However, with sbt-github-actions, the scala: entry in the job matrix: is populated from the
 ThisBuild / crossScalaVersions key in your build.sbt.
+
+### [sbt-native-image](https://github.com/scalameta/sbt-native-image)
+
+This plugin makes it easy to generate native-image binaries with sbt. Key features:
+
+* automatic GraalVM native-image installation powered by Coursier, no need to start sbt with a custom $JAVA_HOME or spin
+  up Docker. See One-click install for Scala for more details.
+* automatic support for Scala 2.12.12+ and 2.13.3+, no need to deal with issues like scala/bug#11634.
+* works with Scala 3 (Dotty)
+* get a notification when the binary is ready to use.
+* works on macOS, Windows and Linux.
+* works with Java 8 and Java 11.
+
+```bash
+$ sbt
+ > myNativeImageProject / nativeImage
+ ...
+ [info] Native image ready !
+ [info] / path / to / your / binary
+```
+
+Optionally, use `nativeImageRun` to execute the generated binary and manually test that it works as expected.
 
 ### [sbt-native-packager](https://github.com/sbt/sbt-native-packager)
 
