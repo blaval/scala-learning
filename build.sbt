@@ -1,4 +1,4 @@
-inThisBuild(Seq(version := "0.1.0-SNAPSHOT", scalaVersion := "3.1.0-RC2", organization := "blaval"))
+inThisBuild(Seq(version := "0.1.0-SNAPSHOT", scalaVersion := "2.13.8", organization := "blaval"))
 
 val scalaTest = "org.scalatest"     %% "scalatest"        % "3.2.11"
 val gigahorse = "com.eed3si9n"      %% "gigahorse-okhttp" % "0.6.0"
@@ -14,8 +14,7 @@ lazy val ScalaLearning = (project in file("."))
     Compile / mainClass             := (scalaLearningCore / Compile / mainClass).value,
     libraryDependencies += scalaTest % Test,
     publish                         := {},
-    publish / skip                  := true,
-    addDependencyTreePlugin // Visualize your project's dependencies.
+    publish / skip                  := true
   )
 
 lazy val taskExample  = taskKey[Unit]("re-run each time the task is executed")
@@ -46,7 +45,7 @@ lazy val scalaLearningCats = (project in file("modules/cats"))
   .settings(
     name := "scala-learning-cats",
     libraryDependencies ++= Seq(
-      "org.typelevel" %% "cats-effect"         % "3.3.8",
+      "org.typelevel" %% "cats-effect"         % "3.3.0",
       "org.typelevel" %% "munit-cats-effect-3" % "1.0.7"
       //  "org.typelevel" %% "cats-mtl" % "1.1.2.1"
     )

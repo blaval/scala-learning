@@ -40,6 +40,7 @@ inspect tree <task> # generate the dependencies tree of the task
 console # run scala interpreter (REPL)
 plugins # lists auto plugins (enabled and not enabled) per subprojects
 last <task> # see the previous output of a command at a higher verbosity
+evicted # Display detailed eviction warnings.
 
 ~<task> # to automatically rerun a task, e.g ~run
 ~testQuick # automatically rerun failed tests
