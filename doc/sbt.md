@@ -26,7 +26,7 @@ sbt IntegrationTest/test
 
 ### In server mode
 
-While `sbt` is running
+While `sbt` or `sbtn` (for running the thin client quickly) is running
 
 ```bash
 # (Ctrl-R incrementally searches the history backwards)
@@ -64,6 +64,8 @@ dist # create a distribution package
   ./<projectName>/bin/<executableName>
 
 Docker/publishLocal # create a docker image locally
+
+githubWorkflowGenerate # generate github workflow `ci.yml` and `clean.yml`
 ```
 
 ## sbt Keys

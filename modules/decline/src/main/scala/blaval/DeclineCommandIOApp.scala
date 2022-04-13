@@ -42,17 +42,23 @@ object DockerCLI {
 
 object DockerLogic {
 
-  def interpret[A <: DockerModels](opts: Opts[A]): Opts[IO[ExitCode]] =
+  def interpret[A <: DockerModels](opts: Opts[A]): Opts[IO[ExitCode]] = {
+    println(opts)
     opts map {
       case ShowProcesses(all)           => println(all); IO(ExitCode.Success)
       case BuildImage(dockerFile, path) => println(path); println(dockerFile); IO(ExitCode.Success)
+      case e                            => println(e); IO(ExitCode.Success)
     }
+  }
 
 }
 
 object DeclineCommandIOApp
     extends CommandIOApp(name = "docker", header = "Fake docker command line", version = "0.0.x") {
 
-  override def main: Opts[IO[ExitCode]] = interpret(showProcessesOpts orElse buildOpts)
+  override def main: Opts[IO[ExitCode]] = {
+    println("OKKDSOKDOSK")
+    interpret(showProcessesOpts orElse buildOpts)
+  }
 
 }
